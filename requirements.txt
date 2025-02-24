@@ -1,4 +1,4 @@
-streamlit
-openai
-os
-moviepy
+moviepy==2.1.2
+openai==1.0.0
+streamlit==1.38.0
+os==0.1.0
