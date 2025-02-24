@@ -41,19 +41,20 @@ def main():
         video_file_path = "uploaded_video.mp4"
         audio_file_path = "extracted_audio.mp3"
         
-        with open(video_file_path, "wb") as f:
-            f.write(uploaded_file.read())
         
         # Extract audio
         if uploaded_file.type.startswith('video/'):
+            with open(video_file_path, "wb") as f:
+                f.write(uploaded_file.read())
             extract_audio(video_file_path, audio_file_path)
         elif uploaded_file.type == 'audio/mpeg':
-            audio_file_path = video_file_path
             with open(audio_file_path, "wb") as f:
                 f.write(uploaded_file.read())
+            audio_file_path = video_file_path
         else:
             st.error("Unsupported file type. Please upload a video or audio.")
 
+        
         # Split audio
         audio_chunks = split_audio(audio_file_path, chunk_length=120)
         
