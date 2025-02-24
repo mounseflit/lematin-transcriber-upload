@@ -1,5 +1,4 @@
-moviepy==2.1.2
-openai==1.0.0
-streamlit==1.38.0
-os==0.1.0
-pydub==0.25.1
+streamlit
+openai
+moviepy
+pydub
