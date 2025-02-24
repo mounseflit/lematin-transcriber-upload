@@ -1,7 +1,7 @@
 import openai
 import os
 import streamlit as st
-from moviepy.editor import VideoFileClip, AudioFileClip
+from moviepy import VideoFileClip, AudioFileClip
 
 def transcribe_audio(audio_chunk_path):
     openai.api_key = st.secrets["OPENAI_API_KEY"]  # Use Streamlit secrets for security
