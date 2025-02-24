@@ -25,7 +25,7 @@ def split_audio(audio_path, chunk_length=120):
     duration = int(audio.duration)
     
     for i in range(0, duration, chunk_length):
-        chunk = audio.subclip(i, min(i + chunk_length, duration))
+        chunk = audio.subclipped(i, min(i + chunk_length, duration))
         chunk_path = f"temp/chunk_{i}.mp3"
         chunk.write_audiofile(chunk_path)
         chunks.append(chunk_path)
