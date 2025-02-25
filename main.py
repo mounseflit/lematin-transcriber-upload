@@ -34,8 +34,8 @@ def split_audio(audio_path, chunk_length=120):
 
 
 def main():
-    st.title("Video to Text Transcription App")
-    uploaded_file = st.file_uploader("Upload a video or audio file", type=["mp4", "mov", "avi", "mp3", "wav"])
+    st.title("Transcripteur des Vidéos et Audio Le Matin")
+    uploaded_file = st.file_uploader("Upload a video or audio file (200MB)", type=["mp4", "mov", "avi", "mp3", "wav"])
                                                                            
     if uploaded_file is not None:
         video_file_path = "uploaded_video.mp4"
