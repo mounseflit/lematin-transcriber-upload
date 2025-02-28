@@ -19,7 +19,7 @@ def extract_audio(video_path, audio_path):
     clip.audio.write_audiofile(audio_path)
     clip.close()
 
-def split_audio(audio_path, chunk_length=120):
+def split_audio(audio_path, chunk_length=60):
     audio = AudioFileClip(audio_path)
     chunks = []
     duration = int(audio.duration)
@@ -54,9 +54,10 @@ def main():
         else:
             st.error("Unsupported file type. Please upload a video or audio.")
 
+        st.info("📝 Transcription en cours...")
         
         # Split audio
-        audio_chunks = split_audio(audio_file_path, chunk_length=120)
+        audio_chunks = split_audio(audio_file_path, chunk_length=60)
         
         # Transcribe each chunk
         full_transcript = ""
@@ -64,9 +65,11 @@ def main():
             transcript = transcribe_audio(chunk)
             full_transcript += transcript + "\n"
             os.remove(chunk)
-        
+            
+        st.success("✅ Transcription terminée !")
         st.subheader("Transcription Result:")
-        st.text_area("", full_transcript, height=300)
+        st.text_area("📜 Texte Transcrit", full_transcript, height=300)
+        st.download_button("⬇️ Télécharger la transcription", full_transcript, file_name="transcription.txt")
 
 if __name__ == "__main__":
     main()
