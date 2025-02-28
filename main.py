@@ -78,7 +78,6 @@ def main():
         try:
             audio = MP3(audio_file_path)
             duration = int(audio.info.length)
-            st.text_area("Durée de l'audio (secondes)", str(duration), height=100)
         except Exception as e:
             st.error(f"Erreur lors de la lecture du fichier audio : {e}")
             return
