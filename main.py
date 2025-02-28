@@ -31,7 +31,7 @@ def split_audio(audio_path, duration, chunk_length=60):
         os.makedirs("temp", exist_ok=True)  # Ensure temp directory exists
         
         for i in range(0, int(duration), chunk_length):
-            chunk = audio.subcliped(i, min(i + chunk_length, duration))
+            chunk = audio.subclipped(i, min(i + chunk_length, duration))
             chunk_path = f"temp/chunk_{i}.mp3"
             chunk.write_audiofile(chunk_path)
             chunks.append(chunk_path)
