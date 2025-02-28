@@ -41,6 +41,19 @@ def split_audio(audio_path, duration, chunk_length=60):
         st.error(f"Erreur lors du découpage de l'audio : {e}")
         return []
 
+def remove_if_exists(file_path):
+    """Utility function to remove a file if it exists."""
+    if os.path.exists(file_path):
+        os.remove(file_path)
+
+def clean_temp_folder(folder="temp"):
+    """Utility function to clean up all temporary files."""
+    if os.path.exists(folder):
+        for file in os.listdir(folder):
+            file_path = os.path.join(folder, file)
+            os.remove(file_path)
+
+
 def main():
     st.title("Transcripteur des Vidéos et Audio Le Matin")
     uploaded_file = st.file_uploader("Upload a video or audio file (200MB)", type=["mp4", "mp3"])
@@ -104,9 +117,13 @@ def main():
         st.text_area("📜 Texte Transcrit", full_transcript, height=300)
         st.download_button("⬇️ Télécharger la transcription", full_transcript, file_name="transcription.txt")
 
-        # Cleanup
-        os.remove(audio_file_path)
-        os.remove(file_path)
+        # Clean any existing files
+        remove_if_exists(file_path)
+        remove_if_exists(video_file_path)
+        remove_if_exists(audio_file_path)
+        
+        # Final cleanup
+        clean_temp_folder(temp_dir)
 
 if __name__ == "__main__":
     main()
