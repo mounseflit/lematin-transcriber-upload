@@ -2,6 +2,9 @@ import openai
 import os
 import streamlit as st
 from moviepy import VideoFileClip, AudioFileClip
+from mutagen.mp3 import MP3
+
+
 
 def transcribe_audio(audio_chunk_path):
     openai.api_key = st.secrets["OPENAI_API_KEY"]  # Use Streamlit secrets for security
@@ -20,9 +23,13 @@ def extract_audio(video_path, audio_path):
     clip.close()
 
 def split_audio(audio_path, chunk_length=60):
-    audio = AudioFileClip(audio_path)
+   
     chunks = []
-    duration = int(audio.duration)
+
+    audio = MP3(audio_path)
+    duration = audio.info.length
+    
+    audio = AudioFileClip(audio_path)
     
     for i in range(0, duration, chunk_length):
         chunk = audio.subclipped(i, min(i + chunk_length, duration))
