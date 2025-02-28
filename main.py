@@ -55,7 +55,7 @@ def clean_temp_folder(folder="temp"):
 
 
 def main():
-    st.title("Transcripteur des Vidéos et Audio Le Matin")
+    st.title("🎙️ Transcripteur des Vidéos et Audio Le Matin")
     uploaded_file = st.file_uploader("Upload a video or audio file (200MB)", type=["mp4", "mp3"])
 
     if uploaded_file is not None:
