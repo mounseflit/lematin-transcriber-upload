@@ -60,7 +60,7 @@ def main():
         audio_chunks = split_audio(audio_file_path, chunk_length=60)
         
         # Transcribe each chunk
-        full_transcript = ""
+        full_transcript = " "
         for chunk in audio_chunks:
             transcript = transcribe_audio(chunk)
             full_transcript += transcript + "\n"
@@ -70,6 +70,9 @@ def main():
         st.subheader("Transcription Result:")
         st.text_area("📜 Texte Transcrit", full_transcript, height=300)
         st.download_button("⬇️ Télécharger la transcription", full_transcript, file_name="transcription.txt")
+        
+        os.remove(audio_file_path)  # Nettoyage audio
+        os.remove(video_file_path)  # Nettoyage video
 
 if __name__ == "__main__":
     main()
