@@ -22,13 +22,9 @@ def extract_audio(video_path, audio_path):
     clip.audio.write_audiofile(audio_path)
     clip.close()
 
-def split_audio(audio_path, chunk_length=60):
+def split_audio(audio_path, duration, chunk_length=60):
    
     chunks = []
-
-    audio = MP3(audio_path)
-    duration = audio.info.length
-    
     audio = AudioFileClip(audio_path)
     
     for i in range(0, duration, chunk_length):
@@ -62,9 +58,14 @@ def main():
             st.error("Unsupported file type. Please upload a video or audio.")
 
         st.info("📝 Transcription en cours...")
+
+        audio = MP3(audio_file_path)
+        duration = audio.info.length
+        st.text_area("duree", duration, height=100)
+        
         
         # Split audio
-        audio_chunks = split_audio(audio_file_path, chunk_length=60)
+        audio_chunks = split_audio(audio_file_path, duration, chunk_length=60)
         
         # Transcribe each chunk
         full_transcript = " "
